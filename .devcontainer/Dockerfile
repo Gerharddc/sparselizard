@@ -6,6 +6,7 @@ RUN apt-get update -y && apt-get upgrade -y
 # Install dependencies for Sparselizard
 RUN apt-get install -y \
     clang clang-format cmake zsh git curl \
+    gcc-14 libstdc++-14-dev \
     libopenblas-dev \
     libopenmpi-dev \
     libmumps-dev \

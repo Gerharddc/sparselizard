@@ -13,10 +13,6 @@ SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_FLAGS_DEBUG "-g -Og -Wall -Wextra -Wpedantic")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-# TODO: get this working
-#set(CMAKE_CXX_COMPILER "clang++")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-
 if(NOT BLA_VENDOR)
     set(BLA_VENDOR CACHE STRING OpenBLAS)
 endif()

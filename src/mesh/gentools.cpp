@@ -5,9 +5,7 @@
 #include "lagrangeformfunction.h"
 #include "slmpi.h"
 
-#if defined(__linux__)
-#include <parallel/algorithm>
-#endif
+#include <execution>
 
 void gentools::stablecoordinatesort(std::vector<double> noisethreshold, std::vector<double>& coordinates, std::vector<int>& reorderingvector)
 {
@@ -21,11 +19,7 @@ void gentools::stablecoordinatesort(std::vector<double> noisethreshold, std::vec
     std::iota(reorderingvector.begin(), reorderingvector.end(), 0);
     // Sort 'reorderingvector' according to 'coordinates' with x > y > z priority order:
     // The < operator is overloaded by a lambda function.
-    #if defined(__linux__)
-    __gnu_parallel::sort(reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
-    #else
-    std::sort(reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
-    #endif
+    std::sort(std::execution::par, reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
         { 
             // First sort according to the x coordinate:
             if (coordinates[elem1*3+0] < coordinates[elem2*3+0] - noisethreshold[0])
@@ -273,11 +267,7 @@ void gentools::stablesort(std::vector<int>& tosort, std::vector<int>& reordering
     std::iota(reorderingvector.begin(), reorderingvector.end(), 0);
     // Sort 'reorderingvector' according to 'tosort':
     // The < operator is overloaded by a lambda function.
-    #if defined(__linux__)
-    __gnu_parallel::sort(reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
-    #else
-    std::sort(reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
-    #endif
+    std::sort(std::execution::par, reorderingvector.begin(), reorderingvector.end(), [&](int elem1, int elem2)
         { 
             if (tosort[elem1] < tosort[elem2])
                 return true;
@@ -348,12 +338,7 @@ bool sortfun(const std::tuple<int,int,double>& elem1, const std::tuple<int,int,d
     
 void gentools::tuple3sort(std::vector<std::tuple<int,int,double>>& tosort)
 {
-    // Parallel sort on Linux only for now:
-    #if defined(__linux__)
-    __gnu_parallel::sort(tosort.begin(), tosort.end(), sortfun);
-    #else
-    std::sort(tosort.begin(), tosort.end(), sortfun);
-    #endif
+    std::sort(std::execution::par, tosort.begin(), tosort.end(), sortfun);
 }
 
 void gentools::slicecoordinates(std::vector<double>& toslice, double minx, double miny, double minz, double dx, double dy, double dz, int nsx, int nsy, int nsz, std::vector<int>& ga, int* pn, double* pc)
