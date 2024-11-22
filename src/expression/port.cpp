@@ -47,7 +47,7 @@ std::vector<int> port::getharmonics(void)
 
 port port::harmonic(int harmonicnumber)
 {
-    return port(rawportptr->harmonic({harmonicnumber}));
+    return port(rawportptr->harmonic(harmonicnumber));
 }
 
 port port::harmonic(std::vector<int> harmonicnumbers)

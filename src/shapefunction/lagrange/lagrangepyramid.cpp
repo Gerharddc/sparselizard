@@ -27,7 +27,7 @@ std::vector<polynomial> lagrangepyramid::getformfunctionpolynomials(int order)
           case 1:
           {
                 polynomial ki, eta, phi;
-                ki.set({{{}},{{{1.0}}}});
+                ki.set({{{}},{{1.0}}});
                 eta.set({{{},{1.0}}});
                 phi.set({{{0.0,1.0}}});
 

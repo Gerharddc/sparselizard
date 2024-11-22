@@ -72,7 +72,7 @@ hierarchicalformfunctioncontainer h1line::evalat(int maxorder)
     ////////// Define the 'lambda' and 'sigma' polynomials used in Zaglmayr's thesis:
     
     polynomial ki;
-    ki.set({{{}},{{{1.0}}}});
+    ki.set({{{}},{{1.0}}});
     
     // In Zaglmayr's thesis the reference elements are shifted and deformed.
     // Variable change to correspond to our reference element definition:

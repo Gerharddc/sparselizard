@@ -68,7 +68,7 @@ hierarchicalformfunctioncontainer hcurltriangle::evalat(int maxorder)
     ////////// Define the 'lambda' and 'sigma' polynomials used in Zaglmayr's thesis:
     
     polynomial ki, eta;
-    ki.set({{{}},{{{1.0}}}});
+    ki.set({{{}},{{1.0}}});
     eta.set({{{},{1.0}}});
     
     vector<polynomial> lambda(4);

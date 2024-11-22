@@ -1,0 +1,14 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "DavidAnson.vscode-markdownlint",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    }
+}

@@ -80,7 +80,7 @@ hierarchicalformfunctioncontainer h1prism::evalat(int maxorder)
     ////////// Define the 'lambda' and 'mu' polynomials used in Zaglmayr's thesis:
     
     polynomial ki, eta, phi;
-    ki.set({{{}},{{{1.0}}}});
+    ki.set({{{}},{{1.0}}});
     eta.set({{{},{1.0}}});
     phi.set({{{0.0,1.0}}});
     
