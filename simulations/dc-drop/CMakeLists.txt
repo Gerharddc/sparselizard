@@ -1,0 +1,5 @@
+add_executable(dc-drop main.cpp)
+target_link_libraries(dc-drop PUBLIC sparselizard)
+install(TARGETS dc-drop RUNTIME)
+set(DATA disk.geo disk.msh)
+install(FILES ${DATA} DESTINATION ${CMAKE_INSTALL_BINDIR})
