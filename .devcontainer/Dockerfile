@@ -1,12 +1,14 @@
-FROM ubuntu:noble
+FROM ubuntu:oracular
 
 # Update system
 RUN apt-get update -y && apt-get upgrade -y
 
-# Install dependencies for Sparselizard
+# Install general dev packages
 RUN apt-get install -y \
-    clang clang-format cmake zsh git curl \
-    gcc-14 libstdc++-14-dev \
+    apt-utils cmake g++ clang-format git curl wget sudo
+
+# Install Sparselizard dependencies
+RUN apt-get install -y \
     libopenblas-dev \
     libopenmpi-dev \
     libmumps-dev \
@@ -16,12 +18,17 @@ RUN apt-get install -y \
     libgmsh-dev \
     libomp-dev
 
-# Fix git issues with the container running as root
-RUN git config --global --add safe.directory '*'
+# Use the provided ubuntu user instead of root
+ARG USERNAME=ubuntu
+RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+USER $USERNAME
 
 # Install Oh My Zsh for convenience
-RUN chsh -s $(which zsh)
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.1/zsh-in-docker.sh)" -- \
+    -t robbyrussell \
+    -p git
 
-# Set the default shell to Zsh
+# Set the default shell to zsh
+RUN sudo chsh -s $(which zsh)
 CMD ["zsh"]

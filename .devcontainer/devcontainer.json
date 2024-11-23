@@ -2,8 +2,17 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "remoteUser": "ubuntu",
     "customizations": {
         "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "/bin/zsh"
+                    }
+                }
+            },
             "extensions": [
                 "ms-vscode.cpptools-extension-pack",
                 "DavidAnson.vscode-markdownlint",
