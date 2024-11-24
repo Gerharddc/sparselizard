@@ -40,4 +40,5 @@ int main(void)
 
     // Post-Processing
     V.write(all_copper, "voltage_drop.vtk", 2);
+    (sigma_copper * -grad(V)).write(all_copper, "current_density.vtk", 2);
 }
